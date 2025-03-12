@@ -1,4 +1,4 @@
-const apiKey = `2XHi6d8MXlS89xNfHLTeDkV0gapyeXs0` ; // Replace with your Giphy API key
+ ; // Replace with your Giphy API key
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const gifContainer = document.getElementById('gifContainer');
