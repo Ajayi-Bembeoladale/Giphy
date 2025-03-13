@@ -1,39 +1,42 @@
-const apiKey = `2XHi6d8MXlS89xNfHLTeDkV0gapyeXs0` ; // Replace with your Giphy API key
-const searchInput = document.getElementById('searchInput');
-const searchButton = document.getElementById('searchButton');
-const gifContainer = document.getElementById('gifContainer');
+const apiKey = '2XHi6d8MXlS89xNfHLTeDkV0gapyeXs0'; 
+const searchInput = $('#searchInput');
+const searchButton = $('#searchButton');
+const gifContainer = $('#gifContainer');
 
-searchButton.addEventListener('click', () => {
-  const query = searchInput.value.trim();
+searchButton.on('click', () => {
+  const query = searchInput.val().trim();
   if (query) {
     fetchGifs(query);
   }
 });
 
 function fetchGifs(query) {
-  const url = `https://api.giphy.com/v1/gifs/search?api_key=${apikey}=${query}&limit=10`;
+  const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${query}&limit=10`;
   const xhr = new XMLHttpRequest();
+
   xhr.open('GET', url, true);
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const data = JSON.parse(xhr.responseText);
-      displayGifs(data.data);
-    } else {
-      console.error('Error fetching GIFs:', xhr.statusText);
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) { // Request is complete
+      if (xhr.status === 200) { // Request was successful
+        const data = JSON.parse(xhr.responseText);
+        displayGifs(data.data);
+      } else {
+        console.error('Error fetching GIFs' );
+      }
     }
   };
-  xhr.onerror = function () {
-    console.error('Request failed');
-  };
+
   xhr.send();
 }
 
 function displayGifs(gifs) {
-  gifContainer.innerHTML = ''; // Clear previous results
+  gifContainer.empty(); // Clear previous results
   gifs.forEach(gif => {
-    const img = document.createElement('img');
-    img.src = gif.images.fixed_height.url;
-    img.alt = gif.title;
-    gifContainer.appendChild(img);
+    const img = $('<img>', {
+      src: gif.images.fixed_height.url,
+      alt: gif.title,
+    });
+    gifContainer.append(img);
   });
 }
