@@ -25,6 +25,10 @@ This project is a simple web application that allows users to search for GIFs us
 - **Giphy API**: For fetching GIFs based on user input.
 
 - **JQuery** : For simplifying DOM manipulation.
+
+- **Babel** :  For converting ECMAScript 2015+ code into a backwards compatible version of JavaScript in current and older browsers or environments.
+
+- **eslint** : For handling errors
 ## How To Use
 
 1. Get a Giphy API Key:
